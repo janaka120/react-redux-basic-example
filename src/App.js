@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { createStore } from 'redux';
 
 class App extends Component {
   render() {
@@ -19,3 +20,12 @@ class App extends Component {
 }
 
 export default App;
+
+// Reducer - actually its a function
+const hello = () => ({welcome_msg: 'hello'});
+
+// Store
+const store = createStore(hello);
+
+// display state
+console.log(store.getState());
