@@ -29,12 +29,12 @@ const defaultState = {
 // Reducer - actually its a function
 const greeting = (state = defaultState, action) => {
   switch(action.type) {
-    case 'GREET_ME':
+    case 'GREET_NAME':
       // Need to destructuring previous state object and modify it.
       // Because redux always return new state object.
-      return { ...state, welcome : 'Hello Janaka'};
-    case 'GREET_WORLD':
-      return { ...state, welcome : 'Hello World' };
+      return { ...state, welcome : 'Hello ' + action.payload.name};
+    case 'GREET_TITLE':
+      return { ...state, welcome : `Hello ${action.payload.title} ${action.payload.name}` };
     default:
       return state;  
   }
@@ -43,12 +43,27 @@ const greeting = (state = defaultState, action) => {
 // Store - create a store using greeting Reducer
 const store = createStore(greeting);
 
+// Some payload
+const payload = {
+  name : 'Janaka',
+  title: 'Mr'
+};
+
 // before dispatch action
 console.log(store.getState());
 
 // Action
 store.dispatch({
-  type : 'GREET_ME'
+  type : 'GREET_NAME',
+  payload
+});
+// after dispatch action
+console.log(store.getState());
+
+// another Action
+store.dispatch({
+  type : 'GREET_TITLE',
+  payload
 });
 
 // after dispatch action
